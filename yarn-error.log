@@ -1,0 +1,54 @@
+Arguments: 
+  /usr/bin/node /usr/bin/yarn install
+
+PATH: 
+  /home/artem/.local/share/solana/install/active_release/bin:/home/artem/.local/bin:/home/artem/.cargo/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/lib/wsl/lib:/home/artem/charity-campaign/node_modules/.bin:/mnt/c/VulkanSDK/1.2.198.1/Bin:/mnt/c/Program Files (x86)/VMware/VMware Workstation/bin/:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Program Files/Docker/Docker/resources/bin:/mnt/c/ProgramData/DockerDesktop/version-bin:/mnt/c/Program Files/nodejs/:/mnt/c/Program Files/Git/cmd:/mnt/c/Program Files/CMake/bin:/mnt/c/Program Files/Microchip/xc8/v2.31/bin:/mnt/c/Program Files (x86)/NVIDIA Corporation/PhysX/Common:/mnt/c/Program Files/dotnet/:/mnt/c/Program Files/NVIDIA Corporation/NVIDIA NvDLISR:/mnt/c/WINDOWS/system32:/mnt/c/WINDOWS:/mnt/c/WINDOWS/System32/Wbem:/mnt/c/WINDOWS/System32/WindowsPowerShell/v1.0/:/mnt/c/WINDOWS/System32/OpenSSH/:/mnt/c/Users/artyo/AppData/Local/Programs/Python/Python310/Scripts/:/mnt/c/Users/artyo/AppData/Local/Programs/Python/Python310/:/mnt/c/Users/artyo/.cargo/bin:/mnt/c/Users/artyo/AppData/Local/Microsoft/WindowsApps:/mnt/c/Users/artyo/AppData/Roaming/npm:/mnt/c/Program Files/JetBrains/DataGrip 2021.3.1/bin:/mnt/c/Users/artyo/AppData/Local/Programs/Microsoft VS Code/bin:/mnt/c/Program Files/JetBrains/JetBrains Rider 221.3427.104/bin:/snap/bin
+
+Yarn version: 
+  1.22.18
+
+Node version: 
+  16.15.0
+
+Platform: 
+  linux x64
+
+Trace: 
+  Error: https://akebono-registry-525196003031.d.codeartifact.us-east-1.amazonaws.com/npm/akebono/@project-serum%2fanchor: Unauthenticated: request used expired credentials. Please renew your credentials.
+      at Request.params.callback [as _callback] (/usr/lib/node_modules/yarn/lib/cli.js:66138:18)
+      at Request.self.callback (/usr/lib/node_modules/yarn/lib/cli.js:140883:22)
+      at Request.emit (node:events:527:28)
+      at Request.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:141855:10)
+      at Request.emit (node:events:527:28)
+      at Gunzip.<anonymous> (/usr/lib/node_modules/yarn/lib/cli.js:141777:12)
+      at Object.onceWrapper (node:events:641:28)
+      at Gunzip.emit (node:events:527:28)
+      at endReadableNT (node:internal/streams/readable:1345:12)
+      at processTicksAndRejections (node:internal/process/task_queues:83:21)
+
+npm manifest: 
+  {
+      "scripts": {
+          "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
+          "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
+      },
+      "dependencies": {
+          "@project-serum/anchor": "^0.24.1"
+      },
+      "devDependencies": {
+          "chai": "^4.3.4",
+          "mocha": "^9.0.3",
+          "ts-mocha": "^8.0.0",
+          "@types/bn.js": "^5.1.0",
+          "@types/chai": "^4.3.0",
+          "@types/mocha": "^9.0.0",
+          "typescript": "^4.3.5",
+          "prettier": "^2.6.2"
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile

@@ -1,7 +1,7 @@
 [features]
 seeds = false
 [programs.localnet]
-charity_campaign = "57wzQ9HXv3GqcNdQZoq76TuN7jEbBRbcCDvARbnXCesr"
+charity_campaign = "CWZPtgNPbvoibF9GsYW9QMBAp6iHtcZydRLd7uWS3kQV"
 
 [registry]
 url = "https://anchor.projectserum.com"

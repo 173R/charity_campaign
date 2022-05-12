@@ -2,7 +2,7 @@ use anchor_lang::prelude::*;
 use anchor_spl::token::{self, CloseAccount, Mint, SetAuthority, TokenAccount, Transfer};
 use spl_token::instruction::AuthorityType;
 
-declare_id!("57wzQ9HXv3GqcNdQZoq76TuN7jEbBRbcCDvARbnXCesr");
+declare_id!("CWZPtgNPbvoibF9GsYW9QMBAp6iHtcZydRLd7uWS3kQV");
 
 #[program]
 pub mod charity_campaign {
@@ -97,18 +97,17 @@ pub mod charity_campaign {
 #[account]
 pub struct EscrowAccount {
     pub initializer_key: Pubkey,
-    pub initializer_deposit_token_account: Pubkey,
-    pub initializer_receive_token_account: Pubkey,
-    pub initializer_amount: u64,
-    pub taker_amount: u64,
+    pub initializer_deposit_token_account: Pubkey, //Токен аккаунт (токен А) привязанный к initializerу.
+    pub initializer_receive_token_account: Pubkey, //Токен аккаунт (токен B) привязанный к initializerу.
+    pub initializer_amount: u64, //Кол во токенов A у отправителя
+    pub taker_amount: u64, //Кол во токенов B у получателя
 }
 
 #[derive(Accounts)]
 #[instruction(vault_account_bump: u8, initializer_amount: u64)]
 pub struct Initialize<'info> {
-    #[account(mut, signer)]
-    /// CHECK:
-    pub initializer: AccountInfo<'info>,
+    #[account(mut)]
+    pub initializer: Signer<'info>,
     pub mint: Account<'info, Mint>,
     #[account(
         init,
@@ -127,10 +126,9 @@ pub struct Initialize<'info> {
     pub initializer_receive_token_account: Account<'info, TokenAccount>,
     #[account(zero)]
     pub escrow_account: Box<Account<'info, EscrowAccount>>,
-    /// CHECK:
-    pub system_program: AccountInfo<'info>,
+    pub system_program: Program<'info, System>,
     pub rent: Sysvar<'info, Rent>,
-    /// CHECK:
+    /// CHECK: This is not dangerous because we don't read or write from this account
     pub token_program: AccountInfo<'info>,
 }
 
@@ -198,7 +196,7 @@ impl<'info> Initialize<'info> {
                 .to_account_info()
                 .clone(),
             to: self.vault_account.to_account_info().clone(),
-            authority: self.initializer.clone(),
+            authority: self.initializer.to_account_info().clone(),
         };
         CpiContext::new(self.token_program.clone(), cpi_accounts)
     }
@@ -206,7 +204,7 @@ impl<'info> Initialize<'info> {
     fn into_set_authority_context(&self) -> CpiContext<'_, '_, '_, 'info, SetAuthority<'info>> {
         let cpi_accounts = SetAuthority {
             account_or_mint: self.vault_account.to_account_info().clone(),
-            current_authority: self.initializer.clone(),
+            current_authority: self.initializer.to_account_info().clone(),
         };
         CpiContext::new(self.token_program.clone(), cpi_accounts)
     }
